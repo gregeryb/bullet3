@@ -544,12 +544,12 @@ void							btDbvtBroadphase::collide(btDispatcher* dispatcher)
 	btDbvtProxy*	current=m_stageRoots[m_stageCurrent];
 	if(current)
 	{
-		btDbvtTreeCollider	collider(this);
 		do	{
 			btDbvtProxy*	next=current->links[1];
 			listremove(current,m_stageRoots[current->stage]);
 			listappend(current,m_stageRoots[STAGECOUNT]);
 #if DBVT_BP_ACCURATESLEEPING
+			btDbvtTreeCollider	collider(this);
 			m_paircache->removeOverlappingPairsContainingProxy(current,dispatcher);
 			collider.proxy=current;
 			btDbvt::collideTV(m_sets[0].m_root,current->aabb,collider);
